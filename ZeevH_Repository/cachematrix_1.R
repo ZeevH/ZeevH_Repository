@@ -28,46 +28,29 @@ makeCacheMatrix <- function(x = matrix()) {
 	  mat<<-NULL
 
 	  ## Define object Methods
-	  ## Set Method
         set <- function(y=matrix())
 	 {
-		    if ( class(y)!= "matrix")
-		    {
-			stop("Invalid input parameter")
-	          }
-		    else
-		    {
-		    	mat<<- y
-		    	## mat_inv <<- solve(mat) this line was disabled to enable
-		    	## 		 		to use cacheSolve function
-               	matrix_inv <<- NULL
-		    	matrix_modified <<- TRUE
-		    }
+		    mat<<- y
+		    ## mat_inv <<- solve(mat) this line was disabled to enable
+		    ## 		 		to use cacheSolve function
+                matrix_inv <<- NULL
+		    matrix_modified <<- TRUE
         }
-	  ## Get Method	  
+
         get <- function()
 		{
 		 mat
 		}
-	  ## Set_inverse
+
         set_inverse <- function(x=matrix())
 		{
-		   if ( is.null(x))
-		    {
-			warning("Invalid input parameter")
-	          }
-		   else
-	         {
-		   	matrix_inv <<- x
-		   	matrix_modified <<-FALSE
-		   }
+		   matrix_inv <<- x
+		   matrix_modified <<-FALSE
 		 }
-	  ## Get_inverse Method
         get_inverse <- function()
 		{
 			if (matrix_modified)
 				{
-				## warning("Invalid inverse matrix")
 				return(NULL)
 				}
 			else return( matrix_inv)
@@ -98,19 +81,19 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 ## Function: Retrives the Inverse matrix of a Special Object matrix
-##		 if neccessary computes its value and caches it back. 	
+##		 if neccessary computes its value and caches it back.
 ##
 ## Paramete: "x" - a Speicial obect matrix - mandatory
 ##
 ## Return a matrix that is the inverse of the matrix of 'x'
 ##
-###########################################################################	
+###########################################################################
 
 cacheSolve <- function(x=list()){
 	
-	  ## Check input parater if wrong return NULL
-	  func_names <- c(names)
-	  if (!is.na(match("get_inverse",func_names)))
+	  ## Check input parater 
+
+	  if (names(x)[4] != "get_inverse")
 	  {
 	  	print("Wrong input parameter!")
 	  	return(NULL)
@@ -125,7 +108,7 @@ cacheSolve <- function(x=list()){
         m <- x$get_inverse()
 
         ## if a valid inverse matrix return it's value
-	  
+
 	  if(!is.null(m))  
 	  {
                 message<-("getting cached data")
